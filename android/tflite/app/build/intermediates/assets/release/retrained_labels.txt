@@ -1,0 +1,6 @@
+greenapple(青苹果)
+loquat（枇杷）
+pomegranate（石榴）
+poranges（橘子）
+pumpkin（南瓜）
+redapple（红苹果）

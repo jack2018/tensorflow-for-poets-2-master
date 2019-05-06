@@ -1,0 +1,4 @@
+#Thu Apr 04 09:39:15 CST 2019
+base.0=E\:\\worldelete\\tensorflow-for-poets-2-master\\android\\tflite\\app\\build\\intermediates\\transforms\\dex\\release\\0
+renamed.0=classes.dex
+file.0=E\:\\worldelete\\tensorflow-for-poets-2-master\\android\\tflite\\app\\build\\intermediates\\transforms\\dex\\release\\0\\classes.dex

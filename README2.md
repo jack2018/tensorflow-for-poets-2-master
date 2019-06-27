@@ -127,22 +127,8 @@ python classify_image_inception_v3.py \
 - Inception V3 是Inception 模型（即GoogLeNet）的改进版，可以参考论文Rethinking the Inception Architecture for Computer Vision 了解 其结构细节。
 
 
-###修改如下
-```
-tfrecord.py第340行将
-shuffled_index = range(len(filenames))
-修改为
-shuffled_index = list(range(len(filenames)))
 
-
-tfrecord.py第160行改为? with open(filename, 'rb') as f:
-tfrecord.py
-第94和96行修改为??colorspace = b'RGB'? ? ?image_format = b'JPEG'
-tfrecord.py
-第104行修改为? 'image/class/text': _bytes_feature(str.encode(text)),
-tfrecord.py
-第106行修改为? ?'image/filename':_bytes_feature(os.path.basename(str.encode(filename))),
----------------------------------------------------------------------------------------------
+传入的图片必须是224*224的分辨率
 
 1.训练所有层
 python train_image_classifier.py \  --train_dir=satellite/train_dir \  --dataset_name=satellite \  --dataset_split_name=train \  --dataset_dir=satellite/data \  --model_name=inception_v3 \  --checkpoint_path=satellite/pretrained/inception_v3.ckpt \  --checkpoint_exclude_scopes=InceptionV3/Logits,InceptionV3/AuxLogits \  --max_number_of_steps=100000 \  --batch_size=32 \  --learning_rate=0.001 \  --learning_rate_decay_type=fixed \  --save_interval_secs=300 \  --save_summaries_secs=10 \  --log_every_n_steps=1 \  --optimizer=rmsprop \  --weight_decay=0.00004 \  --clone_on_cpu=True
@@ -161,6 +147,7 @@ python classify_image_inception_v3.py \  --model_path slim/satellite/frozen_grap
 
 6.固化模型到 tflite 模型转化
 toco --graph_def_file=slim/satellite/frozen_graph.pb --input_format=TENSORFLOW_GRAPHDEF --output_format=TFLITE --output_file=tmp/mobilenet_v1_1.0_224.tflite --inference_type=FLOAT --input_type=FLOAT --input_arrays=input --output_arrays=InceptionV3/Predictions/Reshape_1 --input_shapes=1,299,299,3
+生成的frozen_graph.pb可以直接导入Android项目中使用
 
 7.运行导出模型分类单张图片：
 python classify_image_inception_v3.py \  --model_path slim/satellite/frozen_graph.pb \  --label_path data_prepare/pic/label.txt \  --image_file test_image.jpg

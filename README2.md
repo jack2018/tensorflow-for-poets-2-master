@@ -101,7 +101,7 @@ python export_inference_graph.py \
   --dataset_name satellite
 ```
 
-在chapter_3文件夹下运行（需将5271改成train_dir中保存的实际的模型训练步数）：
+在chapter_3文件夹下运行（需将5271改成train_dir中保存的实际的模型训练步数）
 ```
 python freeze_graph.py \
   --input_graph slim/satellite/inception_v3_inf_graph.pb \
